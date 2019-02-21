@@ -39,24 +39,34 @@ speedTest.showMarkers = function() {
     speedTest.markerClusterer.clearMarkers();
   }
 
-  var panel = $('markerlist');
+  var panel = $('markerlistx');
+  var panel2 = $('markerlist2');
+  var panel3 = $('markerlist3');
   panel.innerHTML = '';
+  panel2.innerHTML = '';
+  panel3.innerHTML = '';
+  var le = Object.keys(speedTest.pics).length;
   var numMarkers = 10;
-  for (var i = 0; i < numMarkers; i++) {
+  for (var i = 0; i < le; i++) {
     var titleText = speedTest.pics[i].photo_title;
     if (titleText === '') {
       titleText = 'No title';
     }
 
-    var item = document.createElement('DIV');
-    var title = document.createElement('A');
+    var item = document.createElement('ul');
+    var title = document.createElement('li');
     title.href = '#';
     title.className = 'title';
     title.innerHTML = titleText;
 
     item.appendChild(title);
     panel.appendChild(item);
-
+	if(speedTest.pics[i].category === 'A') {
+		panel2.appendChild(item);
+	}
+	else if(speedTest.pics[i].category === 'B' || speedTest.pics[i].category === 'C') {
+		panel3.appendChild(item);
+	}
 
     var latLng = new google.maps.LatLng(speedTest.pics[i].latitude,
         speedTest.pics[i].longitude);
