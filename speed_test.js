@@ -42,9 +42,11 @@ speedTest.showMarkers = function() {
   var panel = $('markerlistx');
   var panel2 = $('markerlist2');
   var panel3 = $('markerlist3');
+  var panel4 = $('markerlist4');
   panel.innerHTML = '';
   panel2.innerHTML = '';
   panel3.innerHTML = '';
+  panel4.innerHTML = '';
   var le = Object.keys(speedTest.pics).length;
   var numMarkers = 10;
   for (var i = 0; i < le; i++) {
@@ -60,12 +62,17 @@ speedTest.showMarkers = function() {
     title.innerHTML = titleText;
 
     item.appendChild(title);
-    panel.appendChild(item);
-	if(speedTest.pics[i].category === 'A') {
+	if(speedTest.pics[i].category === 'B') {
 		panel2.appendChild(item);
 	}
-	else if(speedTest.pics[i].category === 'B' || speedTest.pics[i].category === 'C') {
+	else if(speedTest.pics[i].category === 'C') {
 		panel3.appendChild(item);
+	}
+	else if(speedTest.pics[i].category === 'D') {
+		panel4.appendChild(item);
+	}
+	else {
+		panel.appendChild(item);
 	}
 
     var latLng = new google.maps.LatLng(speedTest.pics[i].latitude,
@@ -81,7 +88,7 @@ speedTest.showMarkers = function() {
       'icon': markerImage
     });
 	
-    var fn = speedTest.markerClickFunction(speedTest.pics[i], latLng);
+    var fn = speedTest.markerClickFunction(speedTest.pics[i], latLng, marker);
     google.maps.event.addListener(marker, 'click', fn);
     google.maps.event.addDomListener(title, 'click', fn);
 	if (speedTest.pics[i]['category']==='B') {
@@ -89,11 +96,10 @@ speedTest.showMarkers = function() {
 	}
     speedTest.markers.push(marker);
   }
-
   window.setTimeout(speedTest.time, 0);
 };
 
-speedTest.markerClickFunction = function(pic, latlng) {
+speedTest.markerClickFunction = function(pic, latlng, marker) {
   return function(e) {
     e.cancelBubble = true;
     e.returnValue = false;
@@ -102,7 +108,20 @@ speedTest.markerClickFunction = function(pic, latlng) {
       e.preventDefault();
     }
 	  speedTest.map.setZoom(6);
-	    speedTest.map.setCenter(latlng);
+	  speedTest.map.setCenter(latlng);
+	  for( var i in speedTest.markers ){
+		speedTest.markers[i].setAnimation(null);
+	//	speedTest.markers[i].setMap(null);
+	    speedTest.markers[i].setOptions({'opacity': 0.4})
+		if( speedTest.markers[i]['position'] == marker['position'] ){
+			speedTest.markers[i].setAnimation(google.maps.Animation.BOUNCE);
+	//	    speedTest.markers[i].setMap(speedTest.map);
+			speedTest.markers[i].setOptions({'opacity': 1})
+		}
+		else {
+			
+		}
+	}
     var title = pic.photo_title;
     var url = pic.photo_url;
     var fileurl = pic.photo_file_url;
