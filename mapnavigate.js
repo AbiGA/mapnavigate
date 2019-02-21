@@ -107,7 +107,7 @@ speedTest.markerClickFunction = function(pic, latlng, marker) {
       e.stopPropagation();
       e.preventDefault();
     }
-	  speedTest.map.setZoom(6);
+	  speedTest.map.setZoom(15);
 	  speedTest.map.setCenter(latlng);
 	  for( var i in speedTest.markers ){
 		speedTest.markers[i].setAnimation(null);
