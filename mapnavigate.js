@@ -41,12 +41,10 @@ var mapOptions = {
  
   speedTest.map = new google.maps.Map($('map'), mapOptions);
   var mapType = new google.maps.StyledMapType(stylez, { name:"Grayscale" });    
-speedTest.map.mapTypes.set('tehgrayz', mapType);
-speedTest.map.setMapTypeId('tehgrayz');
+  speedTest.map.mapTypes.set('tehgrayz', mapType);
+  speedTest.map.setMapTypeId('tehgrayz');
   speedTest.pics = data.photos;
   
-  speedTest.map.setCenter(latlng);
-
   speedTest.infoWindow = new google.maps.InfoWindow();
 
   speedTest.showMarkers();
@@ -140,13 +138,7 @@ function myFunction() {
 			//speedTest.markers[i].setMap(null);
 		  }
 	}
-/* Zoom out and set opacity 1 for all markers	 
-	speedTest.map.setZoom(4);
-	 for( var i in speedTest.markers ){
-		speedTest.markers[i].setAnimation(null);
-	    speedTest.markers[i].setOptions({'opacity': 1})
-	}
-*/
+
 }
 
 speedTest.markerClickFunction = function(pic, latlng, marker) {
@@ -159,17 +151,28 @@ speedTest.markerClickFunction = function(pic, latlng, marker) {
     }
 	  speedTest.map.setZoom(17);
 	  speedTest.map.setCenter(latlng);
+	//  marker.setAnimation(google.maps.Animation.BOUNCE);
 	  for( var i in speedTest.markers ){
-		speedTest.markers[i].setAnimation(null);
-	//	speedTest.markers[i].setMap(null);
+		//speedTest.markers[i].setAnimation(null);
+		//speedTest.markers[i].setMap(null);
 	    speedTest.markers[i].setOptions({'opacity': 0.4})
-		if( speedTest.markers[i]['position'] == marker['position'] ){
-			speedTest.markers[i].setAnimation(google.maps.Animation.BOUNCE);
+		if( speedTest.markers[i]['position'] === marker['position'] ){
+			if(marker.getAnimation() === 1){
+				alert('set null');
+				marker.setAnimation(null);
+			}
+			else {
+				marker.setAnimation(google.maps.Animation.BOUNCE);
+			//	alert(marker.getAnimation());
+			}
+			speedTest.markers[i].setOptions({'opacity': 1});
 	//	    speedTest.markers[i].setMap(speedTest.map);
-			speedTest.markers[i].setOptions({'opacity': 1})
+			 break;
 		}
-		else {
-			
+	}
+	for( var i in speedTest.markers ){
+		if( speedTest.markers[i]['position'] !== marker['position'] ){
+			speedTest.markers[i].setAnimation(null);
 		}
 	}
     var title = pic.venue_title;
@@ -193,50 +196,6 @@ speedTest.markerClickFunction = function(pic, latlng, marker) {
     speedTest.infoWindow.open(speedTest.map);
   };
 };
-
-
-speedTest.categoryClickFunction = function(pic, latlng, marker) {
-  return function(e) {
-    e.cancelBubble = true;
-    e.returnValue = false;
-    if (e.stopPropagation) {
-      e.stopPropagation();
-      e.preventDefault();
-    }
-	  speedTest.map.setZoom(20);
-	  speedTest.map.setCenter(latlng);
-	  for( var i in speedTest.markers ){
-		speedTest.markers[i].setAnimation(null);
-	//	speedTest.markers[i].setMap(null);
-	    speedTest.markers[i].setOptions({'opacity': 0.4})
-		if( speedTest.markers[i]['position'] == marker['position'] ){
-			speedTest.markers[i].setAnimation(google.maps.Animation.BOUNCE);
-	//	    speedTest.markers[i].setMap(speedTest.map);
-			speedTest.markers[i].setOptions({'opacity': 1})
-		}
-		else {
-			
-		}
-	}
-    var title = pic.venue_title;
-//    var url = pic.photo_url;
-//    var fileurl = pic.photo_file_url;
-
-    var infoHtml = '<div"><h3>' + title +
-      '</h3><div">' +
-      '<h3>Phone : ' + pic.phone +
-      '</h3></div>' +'<a href="' + pic.wesbsite + '" target="_blank">' +
-      'Web site</a><br/>' +
-      '<a href="' + pic.email + '" target="_blank">'+
-      '</a></div></div>';
-
-    speedTest.infoWindow.setContent(infoHtml);
-	
-    speedTest.infoWindow.setPosition(latlng);
-    speedTest.infoWindow.open(speedTest.map);
-  };
-};
-
 
 speedTest.change = function() {
   speedTest.clear();
