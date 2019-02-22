@@ -40,7 +40,7 @@ var mapOptions = {
 };
  
   speedTest.map = new google.maps.Map($('map'), mapOptions);
-  var mapType = new google.maps.StyledMapType(stylez);    
+  var mapType = new google.maps.StyledMapType(stylez, { name:"Grayscale" });    
 speedTest.map.mapTypes.set('tehgrayz', mapType);
 speedTest.map.setMapTypeId('tehgrayz');
   speedTest.pics = data.photos;
