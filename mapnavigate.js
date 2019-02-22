@@ -12,18 +12,40 @@ speedTest.infoWindow = null;
 var le = null;
 
 speedTest.init = function() {
-  var latlng = new google.maps.LatLng(12.9279, 77.6271);
+  var latlng = new google.maps.LatLng(12.954517, 77.3507357);
+ 
   var options = {
-    'zoom': 4,
+    'zoom': 10,
     'center': latlng,
     'mapTypeId': google.maps.MapTypeId.ROADMAP,
 	'gestureHandling': 'cooperative'
   };
+  var stylez = [
+    {
+      featureType: "all",
+      elementType: "all",
+      stylers: [
+        { saturation: -100 } // <-- THIS
+      ]
+    }
+];
 
-  speedTest.map = new google.maps.Map($('map'), options);
+var mapOptions = {
+    zoom: 10,
+    center: latlng,
+    mapTypeControlOptions: {
+         mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'tehgrayz']
+    },
+	gestureHandling: 'cooperative'
+};
+ 
+  speedTest.map = new google.maps.Map($('map'), mapOptions);
+  var mapType = new google.maps.StyledMapType(stylez, { name:"Grayscale" });    
+speedTest.map.mapTypes.set('tehgrayz', mapType);
+speedTest.map.setMapTypeId('tehgrayz');
   speedTest.pics = data.photos;
   
-  
+  speedTest.map.setCenter(latlng);
 
   speedTest.infoWindow = new google.maps.InfoWindow();
 
@@ -51,7 +73,7 @@ speedTest.showMarkers = function() {
   le = Object.keys(speedTest.pics).length;
   var numMarkers = 10;
   for (var i = 0; i < le; i++) {
-    var titleText = speedTest.pics[i].photo_title;
+    var titleText = speedTest.pics[i].venue_title;
     if (titleText === '') {
       titleText = 'No title';
     }
@@ -116,7 +138,6 @@ function myFunction() {
 			//console.log(speedTest.markers[i]['category']);
 		  if (speedTest.markers[i]["category"] === 'A') {
 			//speedTest.markers[i].setMap(null);
-			alert(speedTest.markers[i]["photo_title"]);
 		  }
 	}
 /* Zoom out and set opacity 1 for all markers	 
@@ -127,6 +148,7 @@ function myFunction() {
 	}
 */
 }
+
 speedTest.markerClickFunction = function(pic, latlng, marker) {
   return function(e) {
     e.cancelBubble = true;
@@ -135,7 +157,7 @@ speedTest.markerClickFunction = function(pic, latlng, marker) {
       e.stopPropagation();
       e.preventDefault();
     }
-	  speedTest.map.setZoom(15);
+	  speedTest.map.setZoom(17);
 	  speedTest.map.setCenter(latlng);
 	  for( var i in speedTest.markers ){
 		speedTest.markers[i].setAnimation(null);
@@ -150,20 +172,21 @@ speedTest.markerClickFunction = function(pic, latlng, marker) {
 			
 		}
 	}
-    var title = pic.photo_title;
-    var url = pic.photo_url;
-    var fileurl = pic.photo_file_url;
+    var title = pic.venue_title;
+  //  var url = pic.photo_url;
+  //  var fileurl = pic.photo_file_url;
 
-    var infoHtml = '<div class="info"><h3>' + title +
-      '</h3><div class="info-body">' +
-      '<a href="' + url + '" target="_blank"><img src="' +
-      fileurl + '" class="info-img"/></a></div>' +
-      '<a href="http://www.panoramio.com/" target="_blank">' +
-      '<img src="http://maps.google.com/intl/en_ALL/mapfiles/' +
-      'iw_panoramio.png"/></a><br/>' +
-      '<a href="' + pic.owner_url + '" target="_blank">' + pic.owner_name +
-      '</a></div></div>';
-
+    var infoHtml = '<h6>' + title +
+      '</h6><br/>' +
+      '<p>Phone : ' + pic.phone +
+      '</p>' +'<a href="' + pic.website + '" target="_blank">' +
+      'Web site</a><br/>' +
+      '<p>Email : '+ pic.email +
+      '</p>'+'<p>Genre : '+pic.genre +'</p>'+
+	  '</p>'+'<p>Address : '+pic.address +'</p><br/>'+
+	  '<a href="' + pic.fb + '" target="_blank">' + 'Facebook</a>'+
+	  '<a href="' + pic.twitter + '" target="_blank">' + ' Twitter</a>'+
+	  '<a href="' + pic.youtube + '" target="_blank">' + ' Youtube</a>';+
     speedTest.infoWindow.setContent(infoHtml);
 	
     speedTest.infoWindow.setPosition(latlng);
@@ -180,7 +203,7 @@ speedTest.categoryClickFunction = function(pic, latlng, marker) {
       e.stopPropagation();
       e.preventDefault();
     }
-	  speedTest.map.setZoom(15);
+	  speedTest.map.setZoom(20);
 	  speedTest.map.setCenter(latlng);
 	  for( var i in speedTest.markers ){
 		speedTest.markers[i].setAnimation(null);
@@ -195,18 +218,16 @@ speedTest.categoryClickFunction = function(pic, latlng, marker) {
 			
 		}
 	}
-    var title = pic.photo_title;
-    var url = pic.photo_url;
-    var fileurl = pic.photo_file_url;
+    var title = pic.venue_title;
+//    var url = pic.photo_url;
+//    var fileurl = pic.photo_file_url;
 
-    var infoHtml = '<div class="info"><h3>' + title +
-      '</h3><div class="info-body">' +
-      '<a href="' + url + '" target="_blank"><img src="' +
-      fileurl + '" class="info-img"/></a></div>' +
-      '<a href="http://www.panoramio.com/" target="_blank">' +
-      '<img src="http://maps.google.com/intl/en_ALL/mapfiles/' +
-      'iw_panoramio.png"/></a><br/>' +
-      '<a href="' + pic.owner_url + '" target="_blank">' + pic.owner_name +
+    var infoHtml = '<div"><h3>' + title +
+      '</h3><div">' +
+      '<h3>Phone : ' + pic.phone +
+      '</h3></div>' +'<a href="' + pic.wesbsite + '" target="_blank">' +
+      'Web site</a><br/>' +
+      '<a href="' + pic.email + '" target="_blank">'+
       '</a></div></div>';
 
     speedTest.infoWindow.setContent(infoHtml);
