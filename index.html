@@ -15,6 +15,10 @@ div[role^="button"]{display:none !important}
 ul.navbar-nav.mr-auto {
 	margin: 0 auto;
 }
+.btn.focus, .btn:focus {
+    outline: 0;
+    box-shadow: none !important;
+}
 button
 .gmnoprint div {
     background:none !important;
@@ -133,12 +137,6 @@ button
     </form> -->
   </div>
 </nav>
-<div class="dropdown-menu">
-  <a class="dropdown-item" href="#">Link 1</a>
-  <a class="dropdown-item" href="#">Link 2</a>
-  <a class="dropdown-item-text" href="#">Text Link</a>
-  <span class="dropdown-item-text">Just Text</span>
-</div>
 
   <div class="container-fluid">
 	<div class="row">
@@ -146,14 +144,15 @@ button
 		    <div id="panel">
 				<h3 style="font-size: 22px; font-weight: 700;">India Culture Map</h3>
 				<strong>Venue List</strong>
+	<!--			<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search venue" title="Type in a name">  -->
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<div class="btn-group">
-								<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+								<a style="color: #b62025;" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 								  Museum/Gallery
 								  <span class="caret"></span>
 								</a>
-								<ul class="dropdown-menu">
+								<ul id="myUL" class="dropdown-menu">
 								  <div id="markerlistx"></div>
 								</ul>
 							</div>
@@ -162,11 +161,11 @@ button
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<div class="btn-group">
-								<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+								<a style="color: #b62025;" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 								  Performance Space
 								  <span class="caret"></span>
 								</a>
-								<ul class="dropdown-menu">
+								<ul id="myUL" class="dropdown-menu">
 								  <div id="markerlist2"></div>
 								</ul>
 							</div>
@@ -175,11 +174,11 @@ button
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<div class="btn-group">
-								<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+								<a style="color: #b62025;" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 								  Category3
 								  <span class="caret"></span>
 								</a>
-								<ul class="dropdown-menu">
+								<ul id="myUL" class="dropdown-menu">
 								  <div id="markerlist3"></div>
 								</ul>
 							</div>
@@ -188,11 +187,11 @@ button
 					<div class="panel panel-default">
 						<div class="panel-body">
 							<div class="btn-group">
-								<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+								<a style="color: #b62025;" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 								  Category4
 								  <span class="caret"></span>
 								</a>
-								<ul class="dropdown-menu">
+								<ul id="myUL" class="dropdown-menu">
 								  <div id="markerlist4"></div>
 								</ul>
 							</div>

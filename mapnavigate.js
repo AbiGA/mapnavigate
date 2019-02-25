@@ -113,16 +113,16 @@ speedTest.showMarkers = function() {
     google.maps.event.addListener(marker, 'click', fn);
     google.maps.event.addDomListener(title, 'click', fn);
 	if (speedTest.pics[i]['category']==='A') {
-		marker.setIcon('category-1.png');
+		marker.setIcon('images/icons/category-1.png');
 	}
 	else if (speedTest.pics[i]['category']==='B') {
-		marker.setIcon('category-2.png');
+		marker.setIcon('images/icons/category-2.png');
 	}
 	else if (speedTest.pics[i]['category']==='C') {
-		marker.setIcon('category-3.png');
+		marker.setIcon('images/icons/category-3.png');
 	}
 	else if (speedTest.pics[i]['category']==='D') {
-		marker.setIcon('category-4.png');
+		marker.setIcon('images/icons/category-4.png');
 	}
     speedTest.markers.push(marker);
   }
@@ -188,7 +188,24 @@ speedTest.markerClickFunction = function(pic, latlng, marker) {
     speedTest.infoWindow.open(speedTest.map);
   };
 };
-
+/*
+function myFunction() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+*/
 function delhi(p1, p2) {
 	 var coordinates = new google.maps.LatLng(28.6466773, 76.813073);
   	  speedTest.map.setZoom(10);
