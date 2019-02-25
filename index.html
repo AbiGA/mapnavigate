@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
   <head>
+    <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <title>Map Navigation</title>
 
@@ -86,6 +87,23 @@ button
         height: 220px;
         width: 200px;
       }
+	  #markerlistx>ul, #markerlist2>ul, #markerlist3>ul,#markerlist4>ul {
+			padding: 2%;
+		}
+	  li.title {
+		width: 100%;
+	  }
+	  @media (max-width: 678px) {
+		ul#myUL {
+			left: -16% !important;
+		}
+		.col-sm-2 {
+			text-align: center;
+		}
+		div#navbarSupportedContent, .dropdown-menu.show {
+			text-align: center;
+		}
+	  }
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -142,7 +160,7 @@ button
 	<div class="row">
 		<div class="col-sm-2">
 		    <div id="panel">
-				<h3 style="font-size: 22px; font-weight: 700;">India Map</h3>
+				<h3 style="font-size: 22px; font-weight: 700;">Map Navigation</h3>
 				<strong>Venue List</strong>
 	<!--			<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search venue" title="Type in a name">  -->
 					<div class="panel panel-default">
