@@ -189,6 +189,21 @@ speedTest.markerClickFunction = function(pic, latlng, marker) {
   };
 };
 
+function delhi(p1, p2) {
+	 var coordinates = new google.maps.LatLng(28.6466773, 76.813073);
+  	  speedTest.map.setZoom(10);
+	  speedTest.map.setCenter(coordinates);
+}
+function bangalore(p1, p2) {
+	 var coordinates = new google.maps.LatLng(12.9538477, 77.3507442);
+  	  speedTest.map.setZoom(10);
+	  speedTest.map.setCenter(coordinates);
+}
+function mumbai(p1, p2) {
+	 var coordinates = new google.maps.LatLng(19.0821978, 72.7411);
+  	  speedTest.map.setZoom(11);
+	  speedTest.map.setCenter(coordinates);
+}
 
 speedTest.categoryClickFunction = function(pic, latlng, marker) {
   return function(e) {
