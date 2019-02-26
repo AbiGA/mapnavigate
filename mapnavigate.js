@@ -126,6 +126,7 @@ speedTest.showMarkers = function() {
 	}
     speedTest.markers.push(marker);
   }
+  //var markerCluster = new MarkerClusterer(speedTest.map, speedTest.markers, {imagePath: 'images/m'});
   window.setTimeout(speedTest.time, 0);
 };
 
